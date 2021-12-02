@@ -3,13 +3,7 @@ class Day02 {
 
     data class Directions(
         var depth: Int = 0,
-        var forward: Int = 0
-    )
-
-    data class DirectionsAim(
-        private val directions: Directions = Directions(),
-        var depth: Int = directions.depth,
-        var forward: Int = directions.forward,
+        var forward: Int = 0,
         var aim: Int = 0
     )
 
@@ -28,24 +22,24 @@ class Day02 {
     }
 
     fun task02(): Int {
-        val directionsAim: DirectionsAim = DirectionsAim()
+        val directions: Directions = Directions()
 
         input.forEach {
             val value: Int = it.split(" ")[1].toInt()
             when {
                 it.contains("up") -> {
-                    directionsAim.aim -= value
+                    directions.aim -= value
                 }
                 it.contains("down") -> {
-                    directionsAim.aim += value
+                    directions.aim += value
                 }
                 it.contains("forward") -> {
-                    directionsAim.forward += value
-                    directionsAim.depth += directionsAim.aim * value
+                    directions.forward += value
+                    directions.depth += directions.aim * value
                 }
             }
         }
-        return directionsAim.depth * directionsAim.forward
+        return directions.depth * directions.forward
     }
 }
 
